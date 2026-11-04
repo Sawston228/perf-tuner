@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Perf Tuner · Think Less",
+    "description": "Injects the 10 efficiency rules from the 'AI efficiency notes' video into every session, caps reasoning effort, and optionally trims very long tool output to cut wasted reasoning and context tokens."
+  }
+}

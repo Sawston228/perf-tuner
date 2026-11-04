@@ -1,0 +1,43 @@
+{
+  "name": "dsh-perf-tuner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Performance tuner for DeepSeek Harness: injects the 'think less, be more accurate' efficiency rules into every session, caps per-request reasoning effort, and optionally trims very long tool output to cut wasted tokens.",
+  "type": "module",
+  "main": "index.js",
+  "icon": "./icon.svg",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sawston228/perf-tuner.git"
+  },
+  "homepage": "https://github.com/Sawston228/perf-tuner#readme",
+  "exports": {
+    ".": "./index.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "locale/*.json",
+    "icon.svg",
+    "cordis.patch.yml",
+    "README.md"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "performance",
+    "reasoning-effort",
+    "tokens"
+  ],
+  "license": "MIT"
+}

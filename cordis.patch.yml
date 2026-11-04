@@ -1,0 +1,24 @@
+# Patch layer for the `dsh-perf-tuner` bundle.
+#
+# Every value below is the documented default; users may override any of them
+# from the profile's own `cordis.patch.yml` by targeting row `dsh-perf-tuner`.
+#
+#   rules: 'full' | 'lean' | 'off'   inject the efficiency rules into the system prompt
+#   language: 'zh' | 'en'            language of the injected rules
+#   effortCap: 'low' | 'high' | 'max' | 'none'  upper bound for reasoningEffort (downgrade only)
+#   providers: ['deepseek-official'] only these providers get the effort cap
+#   extraRules: ['...']              extra numbered rules appended to the section
+#   trimOutput: false                opt-in: trim text tool results longer than the threshold
+#   trimThresholdChars: 15000        trim threshold when trimOutput is true
+- insert:
+    - id: dsh-perf-tuner
+      name: 'dsh-perf-tuner'
+      config:
+        rules: 'full'
+        language: 'zh'
+        effortCap: 'high'
+        providers:
+          - 'deepseek-official'
+        extraRules: []
+        trimOutput: false
+        trimThresholdChars: 15000
