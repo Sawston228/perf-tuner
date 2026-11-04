@@ -82,7 +82,7 @@
 
 ## 设计边界
 
-- 规则段全局生效（主 agent、子代理、Teammate 都会带）——视频第 8 条本来就要求子代理也执行效率规则；如果只想主 agent 生效，可以把注册挪到 `agent/created` 的 `agent.ctx` 上（见 `research/plugin-scout-report.md` §3.5）。
+- 规则段全局生效（主 agent、子代理、Teammate 都会带）——视频第 8 条本来就要求子代理也执行效率规则；如果只想主 agent 生效，可以在 `agent/created` 监听里把同样的 `section()` 注册到该 agent 的 `agent.ctx` 上（scoped 段会 shadow 全局同名段）。
 - **零依赖**是硬约束：本地 link 安装的包解析不到 profile/asar 的 `node_modules`，所以本包不 import 任何 `@deepseek-ai/*`、不导出 schemastery `Config`，默认值与校验都在 `index.js` 里。
 - `trimOutput` 默认关：截断可能藏掉模型真正需要的中段信息，只有你确认某类工具输出冗长时才开。它只处理文本块，**跳过 `isError` 结果**（不藏栈），也不动结构化输出；另外 `job_output` / `terminal` 这类结果会在 `post-execute` 之后由 `finalizeContent` 重新生成正文，修剪对它们不生效（`pwsh` / `read` / `grep` / `web_fetch` 等没有这个问题）。
 - 没有「最大思考 token 数」这种硬预算 API；最接近的是 `reasoningEffort` 档位，档位之外只能事后观测（`usage.reasoningTokens`）。
