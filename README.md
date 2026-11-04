@@ -63,7 +63,7 @@
 
 ```powershell
 # 方式一：从 GitHub 安装（固定 commit；升级时改 commit）
-& 'D:\apps\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'github:Sawston228/perf-tuner#a50a6baa5ae74eedea3047f2d4f90db3e97981b6'
+& 'D:\apps\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'github:Sawston228/perf-tuner#fef832fb0c373388c57cabbd659f79ec4f2ffb12'
 
 # 方式二：本地开发安装（在 DSH 插件页 install_bundle 指向本目录，或用 CLI link:）
 & 'D:\apps\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'link:D:\dsh插件\packages\dsh-perf-tuner'
