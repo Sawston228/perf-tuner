@@ -62,14 +62,16 @@
 ## 安装与验证
 
 ```powershell
-# 在 DSH 的 Plugin Manager 里 install_bundle 指向这个目录（推荐，走正常包管理流程）
-# 或在工作区用 CLI（把 <目录> 换成真实路径）：
+# 方式一：从 GitHub 安装（固定 commit；升级时改 commit）
+& 'D:\apps\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'github:Sawston228/perf-tuner#a50a6baa5ae74eedea3047f2d4f90db3e97981b6'
+
+# 方式二：本地开发安装（在 DSH 插件页 install_bundle 指向本目录，或用 CLI link:）
 & 'D:\apps\DeepSeek Harness\resources\runtime\cli\bin\dsh.cmd' plugin --profile desktop add 'link:D:\dsh插件\packages\dsh-perf-tuner'
 ```
 
 验证（三条独立证据）：
 
-1. `cordis_inspect_query` → host / `Config` / `listConfigs` `{ name: 'dsh-perf-tuner' }`，状态应为 `schema`（不是 `inactive`/`failed`）。
+1. 插件页出现 `dsh-perf-tuner` 且为启用状态；`cordis_inspect_query` → host / `Config` / `listConfigs` `{ name: 'dsh-perf-tuner' }` 能查到 entry（本包不导出 `Config` schema，`status` 可能是 `absent`，与 `dsh-pdf` 相同，不代表未加载）。
 2. 新开一个会话跑一轮，在 `C:\Users\21249\.dsh\sessions\<cwd 转义目录>\` 的会话 JSONL 里 grep `perf:policy` 或规则首句「一次定论」——系统提示是逐段 commit 成 `system/message` 事件，命中即证明规则进了 prompt。
 3. 同一 JSONL 里看 `request/header` 事件的 `config.reasoningEffort`：装了插件后应从 `max` 变成 `high`（或你配置的封顶档）。**要在安装前就存在的会话里看**——新会话本来就该生效，老会话才暴露 `prepend` 没加对的问题。
 
